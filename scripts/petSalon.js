@@ -10,6 +10,7 @@ let pets = [
     gender: "Male",
     service: "Grooming",
     breed: "Rottweiler",
+    type: "Dog",
   },
   {
     name: "Sol",
@@ -17,6 +18,7 @@ let pets = [
     gender: "Male",
     service: "Vaccination",
     breed: "Bulldog",
+    type: "Dog",
   },
   {
     name: "Maxine",
@@ -24,6 +26,7 @@ let pets = [
     gender: "Female",
     service: "Nail Trim",
     breed: "Poodle",
+    type: "Dog",
   },
 ];
 
@@ -61,4 +64,77 @@ window.onload = function () {
     displayPetCount();
     displayPetNames();
     displayAverageAge();
+};
+
+// Step 6: Salon object literal
+const salon = {
+  name: "Mitchell Pet Salon",
+  address: {
+    street: "12 Brandonwood Dr",
+    city: "O'Fallon",
+    state: "IL",
+    zip: "62269"
+  },
+  phone: "618-215-5444"
+};
+
+// Display salon info on the page
+document.getElementById("salonInfo").textContent = 
+  `${salon.name} - ${salon.address.street}, ${salon.address.city} | Phone: ${salon.phone}`;
+
+// Step 2: Pet constructor
+function pet(name, age, gender, breed, service, type) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.breed = breed;
+  this.service = service;
+  this.type = type;
+}
+
+
+
+// Step 4: Display pets
+function displayPets() {
+  const petList = document.getElementById("petList");
+  petList.innerHTML = "";
+
+  for (let i = 0; i < pets.length; i++) {
+    let li = document.createElement("li");
+    li.textContent = `${pets[i].name} (${pets[i].type}) - ${pets[i].service}`;
+    petList.appendChild(li);
+  }
+
+  // Update pet count
+  document.getElementById("petCount").textContent = pets.length;
+}
+
+// Step 5: Register new pet via form
+document.getElementById("petForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // prevent form reload
+
+  // Get form values
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  const breed = document.getElementById("breed").value;
+  const service = document.getElementById("service").value;
+  const type = document.getElementById("type").value;
+
+  // Create new pet using constructor
+  const newPet = new pet(name, age, gender, breed, service, type);
+
+  // Add to pets array
+  pets.push(newPet);
+
+  // Refresh pet list
+  displayPets();
+
+  // Clear form
+  document.getElementById("petForm").reset();
+});
+
+// Step 6: Initialize
+window.onload = function() {
+  displayPets();
 };
