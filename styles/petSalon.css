@@ -1,4 +1,8 @@
 body {
+  background-image: url(images\background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   font-family: Arial, sans-serif;
   background: #fef9f6;
   margin: 0;
@@ -33,8 +37,7 @@ header {
 img {
     display: block;
     margin: 0 auto;
-   width: 80%;
-   height: auto;
+    max-width: 100%;
     max-width: 1000px; /* Limits the maximum width of the image */
   height: auto;
   background-size: cover; /* Ensures the image covers the entire header area */
@@ -68,14 +71,8 @@ section {
   background: #ffe0b2;
   border-radius: 8px;
 }
-body {
-  font-family: Arial, sans-serif;
-  background: #fef9f6;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  color: #333;
-}
+
+
 
 header {
   background-color: #ff8c42;
@@ -137,3 +134,13 @@ nav .navbar-brand {
   font-weight: bold;
   font-size: 1.5rem;
 }
+.row{
+    width:auto;
+    border:1px solid #e6732c;
+    padding:5px;
+    margin:5px;
+    display:flex;
+ 
+
+}
+

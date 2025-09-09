@@ -33,6 +33,7 @@ let pets = [
 // Step 2: Function to display total pet count
 function displayPetCount() {
   document.getElementById("petCount").textContent = pets.length;
+  
 }
 
 // Step 3: Function to display pet names
@@ -61,9 +62,10 @@ function displayAverageAge() {
 
 // Step 5: Initialize on page load
 window.onload = function () {
-    displayPetCount();
-    displayPetNames();
+    displayRow();
     displayAverageAge();
+    displayPetCount();
+    displayPetNames(); 
 };
 
 // Step 6: Salon object literal
@@ -95,6 +97,7 @@ function pet(name, age, gender, breed, service, type) {
 
 
 // Step 4: Display pets
+/*
 function displayPets() {
   const petList = document.getElementById("petList");
   petList.innerHTML = "";
@@ -103,11 +106,30 @@ function displayPets() {
     let li = document.createElement("li");
     li.textContent = `${pets[i].name} (${pets[i].type}) - ${pets[i].service}`;
     petList.appendChild(li);
+  } */
+// New function to display pets in rows
+function displayRow() {
+  let tableBody = document.getElementById("petTableBody");
+  tableBody.innerHTML = ""; // clear old rows
+
+  for (let pet of pets) {
+    let row = `
+      <tr>
+        <td>${pet.name}</td>
+        <td>${pet.age}</td>
+        <td>${pet.gender}</td>
+        <td>${pet.breed}</td>
+        <td>${pet.service}</td>
+        <td>${pet.type}</td>
+      </tr>
+    `;
+    tableBody.innerHTML += row;
   }
+} 
 
   // Update pet count
   document.getElementById("petCount").textContent = pets.length;
-}
+
 
 // Step 5: Register new pet via form
 document.getElementById("petForm").addEventListener("submit", function(e) {
@@ -128,13 +150,19 @@ document.getElementById("petForm").addEventListener("submit", function(e) {
   pets.push(newPet);
 
   // Refresh pet list
-  displayPets();
+  displayRow();
 
   // Clear form
   document.getElementById("petForm").reset();
 });
 
 // Step 6: Initialize
-window.onload = function() {
-  displayPets();
-};
+/*
+window.onload = function () {
+
+  displayRow();
+  displayAverageAge();
+  displayPetCount();
+  displayPetNames();
+};*/
+
