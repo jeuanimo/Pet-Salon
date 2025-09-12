@@ -1,8 +1,6 @@
-
 // Mitchell Pet Salon Project (petSalon.js)
 
-
-// Step 1: Create pets array with 3 pets (object literals)
+// ----- Initial Pets -----
 let pets = [
   {
     name: "Juanito",
@@ -14,7 +12,7 @@ let pets = [
   },
   {
     name: "Sol",
-    age: 2,
+    age: 45,
     gender: "Male",
     service: "Vaccination",
     breed: "Bulldog",
@@ -22,7 +20,7 @@ let pets = [
   },
   {
     name: "Maxine",
-    age: 5,
+    age: 60,
     gender: "Female",
     service: "Nail Trim",
     breed: "Poodle",
@@ -30,61 +28,67 @@ let pets = [
   },
 ];
 
-// Step 2: Function to display total pet count
+let editingIndex = null;
+
+// ----- Stats -----
 function displayPetCount() {
   document.getElementById("petCount").textContent = pets.length;
-  
 }
 
-// Step 3: Function to display pet names
 function displayPetNames() {
   let petList = document.getElementById("petNames");
-  petList.innerHTML = ""; // Clear any old content
-
-  for (let i = 0; i < pets.length; i++) {
+  if (!petList) return; // guard in case element doesn't exist
+  petList.innerHTML = "";
+  pets.forEach((p) => {
     let li = document.createElement("li");
-    li.textContent = pets[i].name;
+    li.textContent = p.name;
     petList.appendChild(li);
-  }
+  });
 }
-
-// Step 4 (Extra Challenge): Function to calculate average age
+// Average Age is killing me again..SMDH
 function displayAverageAge() {
-  let totalAge = 0;
+  const avgEl = document.getElementById("avgAge");
+  if (!avgEl) return; // stop if the element doesn't exist
 
-  for (let i = 0; i < pets.length; i++) {
-    totalAge += pets[i].age;
+  if (pets.length === 0) {
+    avgEl.textContent = "0.0";
+        return;
+  }
+
+  let totalAge = 0;
+  for (let pet of pets) {
+    totalAge += Number(pet.age);
   }
 
   let avg = totalAge / pets.length;
-  document.getElementById("avgAge").textContent = avg.toFixed(1); // show 1 decimal
+  avgEl.textContent = avg.toFixed(1); // show one decimal place
+  console.log("displayAverageAge")
 }
 
-// Step 5: Initialize on page load
-window.onload = function () {
-    displayRow();
-    displayAverageAge();
-    displayPetCount();
-    displayPetNames(); 
-};
 
-// Step 6: Salon object literal
+function updateStats() {
+  displayPetCount();
+  displayPetNames();
+  displayAverageAge();
+}
+
+// ----- Salon Info -----
 const salon = {
   name: "Mitchell Pet Salon",
   address: {
     street: "12 Brandonwood Dr",
     city: "O'Fallon",
     state: "IL",
-    zip: "62269"
+    zip: "62269",
   },
-  phone: "618-215-5444"
+  phone: "618-215-5444",
 };
 
-// Display salon info on the page
-document.getElementById("salonInfo").textContent = 
-  `${salon.name} - ${salon.address.street}, ${salon.address.city} | Phone: ${salon.phone}`;
+document.getElementById(
+  "salonInfo"
+).textContent = `${salon.name} - ${salon.address.street}, ${salon.address.city} | Phone: ${salon.phone}`;
 
-// Step 2: Pet constructor
+// ----- Constructor -----
 function pet(name, age, gender, breed, service, type) {
   this.name = name;
   this.age = age;
@@ -94,25 +98,12 @@ function pet(name, age, gender, breed, service, type) {
   this.type = type;
 }
 
-
-
-// Step 4: Display pets
-/*
-function displayPets() {
-  const petList = document.getElementById("petList");
-  petList.innerHTML = "";
-
-  for (let i = 0; i < pets.length; i++) {
-    let li = document.createElement("li");
-    li.textContent = `${pets[i].name} (${pets[i].type}) - ${pets[i].service}`;
-    petList.appendChild(li);
-  } */
-// New function to display pets in rows
+// ----- Display Table -----
 function displayRow() {
   let tableBody = document.getElementById("petTableBody");
-  tableBody.innerHTML = ""; // clear old rows
+  tableBody.innerHTML = "";
 
-  for (let pet of pets) {
+  pets.forEach((pet, index) => {
     let row = `
       <tr>
         <td>${pet.name}</td>
@@ -121,21 +112,63 @@ function displayRow() {
         <td>${pet.breed}</td>
         <td>${pet.service}</td>
         <td>${pet.type}</td>
+        <td><button class="btn btn-warning btn-sm" onclick="editPet(${index})">Edit</button></td>
+        <td><button class="btn btn-danger btn-sm" onclick="deletePet(${index})">Delete</button></td>
       </tr>
     `;
     tableBody.innerHTML += row;
-  }
-} 
+  });
 
-  // Update pet count
-  document.getElementById("petCount").textContent = pets.length;
+  updateStats();
+}
+// ----- Helper: Clear Form Clear without reset fingers crossed -----
+function clearForm() {
+  console.log("clearForm is running..."); // debug
+  document.getElementById("name").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("gender").value = "";
+  document.getElementById("breed").value = "";
+  document.getElementById("service").value = "";
+  document.getElementById("type").value = "";
+
+  editingIndex = null;
+  document.getElementById("updateBtn").style.display = "none";
+  document.getElementById("registerBtn").style.display = "inline-block";
+}
 
 
-// Step 5: Register new pet via form
-document.getElementById("petForm").addEventListener("submit", function(e) {
-  e.preventDefault(); // prevent form reload
 
-  // Get form values
+
+
+// ----- Delete -----
+function deletePet(index) {
+  pets.splice(index, 1);
+  displayRow();
+}
+
+// ----- Edit -----
+function editPet(index) {
+  editingIndex = index;
+  let pet = pets[index];
+
+  document.getElementById("name").value = pet.name;
+  document.getElementById("age").value = pet.age;
+  document.getElementById("gender").value = pet.gender;
+  document.getElementById("breed").value = pet.breed;
+  document.getElementById("service").value = pet.service;
+  document.getElementById("type").value = pet.type;
+
+  // show Update button
+  document.getElementById("updateBtn").style.display = "inline-block";
+
+  // hide Register button so user doesn’t accidentally add instead of update
+  document.getElementById("registerBtn").style.display = "none";
+}
+
+// ----- Register New -----
+document.getElementById("registerBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+
   const name = document.getElementById("name").value;
   const age = document.getElementById("age").value;
   const gender = document.getElementById("gender").value;
@@ -143,26 +176,42 @@ document.getElementById("petForm").addEventListener("submit", function(e) {
   const service = document.getElementById("service").value;
   const type = document.getElementById("type").value;
 
-  // Create new pet using constructor
   const newPet = new pet(name, age, gender, breed, service, type);
-
-  // Add to pets array
   pets.push(newPet);
 
-  // Refresh pet list
   displayRow();
-
-  // Clear form
-  document.getElementById("petForm").reset();
+  clearForm();
 });
 
-// Step 6: Initialize
-/*
+// ----- Update Existing -----
+document.getElementById("updateBtn").addEventListener("click", function (e) {
+ e.preventDefault();
+
+ if (editingIndex !== null) {
+    // update pet in array
+   pets[editingIndex].name = document.getElementById("name").value;
+   pets[editingIndex].age = document.getElementById("age").value;
+    pets[editingIndex].gender = document.getElementById("gender").value;
+    pets[editingIndex].breed = document.getElementById("breed").value;
+    pets[editingIndex].service = document.getElementById("service").value;
+    pets[editingIndex].type = document.getElementById("type").value; //
+// refresh the table with updated data
+   
+    displayRow();
+// clear form and reset state
+    clearForm();
+  }
+});
+
+// ----- Reset -----
+document.getElementById("resetBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+  clearForm();
+});
+
+// ----- Init -----
 window.onload = function () {
-
   displayRow();
-  displayAverageAge();
-  displayPetCount();
-  displayPetNames();
-};*/
-
+  updateStats();
+  document.getElementById("updateBtn").style.display = "none"; // hide Update at start
+};

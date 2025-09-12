@@ -52,161 +52,153 @@
       <h1 class="header-text">
         🐾Register Your Pet with Mitchell Pet Salon 🐾
       </h1>
-     <p class="header-text" id="salonInfo" style="background-color: rgba(69, 41, 3, 0.861); padding: 15px; border-radius: 10px; max-width: 100%; margin: 10px auto;"></p>
+      <p
+        class="header-text"
+        id="salonInfo"
+        style="
+          background-color: rgb(30, 30, 29);
+          padding: 15px;
+          border-radius: 10px;
+          max-width: 100%;
+          margin: 10px auto;
+        "
+      ></p>
     </header>
 
-    <main>
+    <div class="form-group">
       <!-- Pet registration form -->
 
       <section id="registration">
         <h2>Register a New Pet</h2>
-        <form id="petForm">
-          <input type="text" id="name" placeholder="Pet Name" required />
-          <!-- Age dropdown-->
-          <select id="age" required>
-            <option value="">Select Age</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30">30</option>
-            <option value="31">31</option>
-          </select>
-          <!--Gender dropdown-->
-          <select id="gender" required>
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-          <input type="text" id="breed" placeholder="Breed" required />
-          <!-- Service dropdown -->
-          <select id="service" required>
-            <option value="">Select Service</option>
-            <option value="Grooming">Grooming</option>
-            <option value="Vaccination">Vaccination</option>
-            <option value="Nail Trim">Nail Trim</option>
-            <option value="Check-up">Check-up</option>
-            <option value="Bath">Bath</option>
-            <option value="Haircut">Haircut</option>
-            <option value="Ear Cleaning">Ear Cleaning</option>
-            <option value="Teeth Cleaning">Teeth Cleaning</option>
-            <option value="Massage">Massage</option>
-          </select>
+      <form id="petForm">
+  <!-- Pet Name -->
+  <input type="text" id="name" placeholder="Pet Name" required />
 
-          <!-- Type dropdown -->
-          <select id="type" required>
-            <option value="">Select Animal Type</option>
-            <option value="Dog">Dog</option>
-            <option value="Cat">Cat</option>
-            <option value="Bird">Bird</option>
-            <option value="Other">Other</option>
-          </select>
+  <!-- Age -->
+  <input type="number" id="age" placeholder="Age" required />
 
-          <button type="submit">Register Pet</button>
-          <button type="reset">Reset Form</button>
-        </form>
+  <!-- Gender -->
+  <select id="gender" required>
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+
+  <!-- Breed -->
+  <input type="text" id="breed" placeholder="Breed" required />
+
+  <!-- Service -->
+  <select id="service" required>
+    <option value="">Select Service</option>
+    <option value="Grooming">Grooming</option>
+    <option value="Vaccination">Vaccination</option>
+    <option value="Nail Trim">Nail Trim</option>
+    <option value="Check-up">Check-up</option>
+    <option value="Bath">Bath</option>
+    <option value="Haircut">Haircut</option>
+    <option value="Ear Cleaning">Ear Cleaning</option>
+    <option value="Teeth Cleaning">Teeth Cleaning</option>
+    <option value="Massage">Massage</option>
+  </select>
+
+  <!-- Animal Type -->
+  <select id="type" required>
+    <option value="">Select Animal Type</option>
+    <option value="Dog">Dog</option>
+    <option value="Cat">Cat</option>
+    <option value="Bird">Bird</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <!-- Action Buttons -->
+  <button type="button" id="registerBtn" class="btn btn-primary">Register</button>
+  <button type="button" id="updateBtn" class="btn btn-success" style="display:none;">Update</button>
+  <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+</form>
+
       </section>
 
       <!-- Display registered pets -->
       <div class="container mt-5">
-    <h2 class="text-center mb-4">Registered Pets</h2>
+        <h2 class="text-center mb-4">Registered Pets</h2>
 
-    <!-- Table for pets -->
-     <section> 
-    <table class="table table-striped table-hover table-bordered">
-      <thead class="table-dark">
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Breed</th>
-          <th>Service</th>
-          <th>Animal Type</th>
-        </tr>
-      </thead>
-      <tbody id="petTableBody">
-        <!-- Rows will be injected by JavaScript -->
-      </tbody>
-    </table></section>
-  </div> 
+        <!-- Table for pets -->
+        <section>
+          <table class="table table-striped table-hover table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Breed</th>
+                <th>Service</th>
+                <th>Animal Type</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="petTableBody">
+              <!-- Rows will be injected by JavaScript -->
+            </tbody>
+          </table>
+        </section>
+
+      </div>
       <!-- Registered pets count -->
+       <div>
+        <section>   <h2> Average Age: <span id="aveAge">0</span> </h2>            </section>
+   
+       </div>
       <section id="counter-section">
-        
         <h2>Total Registered Pets: <span id="petCount">0</span></h2>
-      </section>
+      </section></div>
 
-      <!-- Average pet age -->
-      <section id="average-age-section">
-        <h2>Average Age: <span id="avgAge">0</span> years</h2>
-      </section>
+     
 
-      <!-- Pet names list 
-      <section id="pet-list-section">
-        <h2>Registered Pets</h2>
-        <ul id="petList"></ul>
-
-        <!--<h2>Registered Pets (<span id="petCount">0</span>)</h2>
-        <ul id="petList"></ul>
-      </section>-->
+     
     </main>
 
     <footer>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">Mitchell Pet Salon</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="services.html">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="registration.html">Registration</a>
-        </li>
-        
-      </ul>
-    </div>
-  
-</nav>
-    <p>© 2025 Mitchell Pet Salon</p>
-  </footer>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">Mitchell Pet Salon</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-    <script src="./scripts/petSalon.js"></script>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="registration.html">Registration</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <p>© 2025 Mitchell Pet Salon</p>
+    </footer>
+
+    
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <script src="./scripts/petSalon.js"></script>
   </body>
 </html>

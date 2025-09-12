@@ -143,4 +143,8 @@ nav .navbar-brand {
  
 
 }
+#updateBtn {
+  display: none; /* hidden by default */
+}
+
 
