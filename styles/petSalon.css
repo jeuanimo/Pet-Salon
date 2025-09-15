@@ -146,5 +146,34 @@ nav .navbar-brand {
 #updateBtn {
   display: none; /* hidden by default */
 }
+/* Error style for empty fields */
+.error-border {
+  display:none;
+  border: 2px solid red !important;
+}
+/* Standard border for all inputs */
+input, textarea {
+  border: 1px solid #ccc;
+  transition: border-color 0.3s; /* Smooth transition for visual feedback */
+}
 
+/* Make help-block always a bit smaller and red */
+.help-block {
+  color: #a94442;  /* Bootstrap’s default error red */
+  font-size: 12px;
+}
+
+
+#servicesRegistrationForm .has-error .form-control {
+  border: 2px solid red !important;
+  background-color: #ffe6e6 !important;
+}
+.has-error .form-control {
+  border: 2px solid red !important;
+}
+/* Bootstrap has .form-control, so use .has-error .form-control */
+.has-error .form-control {
+  border: 2px solid red;
+  background-color: #fff0f0;
+}
 
