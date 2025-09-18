@@ -3,13 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/petSalon.css"/>
-    <link
+     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+    
+    <link rel="stylesheet" href="styles/petSalon.css"/>
+    
+   
     <title>About Us</title>
   </head>
   <body>
@@ -24,10 +27,11 @@
           data-bs-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation"></button>
+     
+        
           <span class="navbar-toggler-icon"></span>
-        </button>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
@@ -42,17 +46,21 @@
               <a class="nav-link" href="registration.html">Registration</a>
             </li>
           </ul>
+          <button id="darkModeToggle" type="button" class="btn btn-outline-light ms-3">
+          🌙 Dark Mode
+        </button>
         </div>
       </div>
     </nav>
     <div class="header">
       <img src="images/MPS (1).png" alt="Mitchell Pet Salon Logo" />
+      
     </div>
 
     <h1>About Us</h1>
 
     <p
-      class="header-text"
+      
       id="salonInfo"
       style="
         background-color: rgb(255, 140, 0);
@@ -184,12 +192,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="header-text" style="background-color: orange; padding: 15px; border-radius: 10px; max-width: 800px; margin: 0 auto;">
-    <p>Welcome to Mitchell Pet Salon! </p>
-    <p> We are dedicated to providing top-notch grooming services for your beloved pets. Our experienced staff ensures that every pet receives personalized care in a friendly and safe environment.</p>
-    <p>At Mitchell Pet Salon, we understand that your pets are family. That's why we go above and beyond to make sure they look and feel their best. From bathing and haircuts to nail trimming and ear cleaning, we offer a wide range of services to meet your pet's needs.</p>
-    <p>Our salon is equipped with the latest grooming tools and products to ensure a comfortable and enjoyable experience for your furry friends. We also prioritize hygiene and safety, maintaining a clean and sanitized environment at all times.</p>
-    <p>Thank you for choosing Mitchell Pet Salon. We look forward to pampering your pets and making them shine!</p></div>-->
+
 
     <footer>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -224,11 +227,9 @@
       </nav>
       <p>© 2025 Mitchell Pet Salon</p>
     </footer>
-    <script src="./scripts/petSalon.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="./scripts/petSalon.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
   </body>
 </html>

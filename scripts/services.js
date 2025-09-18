@@ -1,3 +1,27 @@
+// --- DARK MODE: bind safely and persist preference ---
+$(function () {
+  var KEY = "prefers-dark-mode";
+
+  function apply(isDark) {
+    $("body").toggleClass("dark-mode", isDark);
+    $("#darkModeToggle").text(isDark ? "☀️ Light Mode" : "🌙 Dark Mode");
+  }
+
+  // Initialize from storage (or default to light)
+  var stored = localStorage.getItem(KEY);
+  apply(stored === "true");
+
+  // Click to toggle
+  $(document).on("click", "#darkModeToggle", function () {
+    var next = !$("body").hasClass("dark-mode");
+    apply(next);
+    localStorage.setItem(KEY, String(next));
+  });
+});
+// Safe helper
+function byId(id) {
+  return document.getElementById(id);
+};
 // Service constructor
 function Service(name, description, price) {
   this.name = name;

@@ -1,4 +1,72 @@
 // Mitchell Pet Salon Project (petSalon.js)
+// --- DARK MODE: bind safely and persist preference ---
+$(function () {
+  var KEY = "prefers-dark-mode";
+
+  function apply(isDark) {
+    $("body").toggleClass("dark-mode", isDark);
+    $("#darkModeToggle").text(isDark ? "☀️ Light Mode" : "🌙 Dark Mode");
+  }
+
+  // Initialize from storage (or default to light)
+  var stored = localStorage.getItem(KEY);
+  apply(stored === "true");
+
+  // Click to toggle
+  $(document).on("click", "#darkModeToggle", function () {
+    var next = !$("body").hasClass("dark-mode");
+    apply(next);
+    localStorage.setItem(KEY, String(next));
+  });
+});
+// Safe helper
+function byId(id){ return document.getElementById(id); }
+
+// Only attach if the element exists on this page:
+var registerBtn = byId("registerBtn");
+if (registerBtn) {
+  registerBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    // ... your register logic ...
+  });
+}
+
+var updateBtn = byId("updateBtn");
+if (updateBtn) {
+  updateBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    // ... your update logic ...
+  });
+}
+
+var resetBtn = byId("resetBtn");
+if (resetBtn) {
+  resetBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    // ... your reset logic ...
+  });
+}
+
+// Guard functions that assume table elements exist:
+function displayPetCount() {
+  var el = byId("petCount");
+  if (el) el.textContent = pets.length;
+}
+
+function displayRow() {
+  var tableBody = byId("petTableBody");
+  if (!tableBody) return;         // <-- guard
+  tableBody.innerHTML = "";
+  // ... build rows ...
+}
+
+// Init only if elements exist on the current page
+window.addEventListener("load", function () {
+  if (byId("petTableBody")) displayRow();
+  displayPetCount();              // guarded above
+  if (byId("updateBtn")) byId("updateBtn").style.display = "none";
+});
+
 
 // ----- Initial Pets -----
 let pets = [
@@ -209,9 +277,12 @@ document.getElementById("resetBtn").addEventListener("click", function (e) {
   clearForm();
 });
 
+
 // ----- Init -----
 window.onload = function () {
   displayRow();
   updateStats();
   document.getElementById("updateBtn").style.display = "none"; // hide Update at start
 };
+
+

@@ -1,38 +1,61 @@
+/* Light theme defaults */
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --nav-bg: #212529;  /* matches .bg-dark */
+  --nav-text: #ffffff;
+  --accent: #ff8c00;  /* banner */
+  --footer-bg: #212529;
+}
+
+/* Dark theme overrides */
+body.dark-mode {
+  --bg: #121212;
+  --text: #e0e0e0;
+  --nav-bg: #1f1f1f;
+  --nav-text: #ffffff;
+  --accent: #333333;
+  --footer-bg: #1f1f1f;
+}
+
+/* Apply theme */
 body {
-  background-image: url(images\background.jpg);
+  background-color: var(--bg);
+  color: var(--text);
+  background-image: url("images/background.jpg"); /* forward slash */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   font-family: Arial, sans-serif;
-  background: #fef9f6;
   margin: 0;
   padding: 0;
   text-align: center;
-  color: #333;
 }
 
-header {
-  background-color: #ff8c42;
-  padding: 20px;
-  color: white;
- background-size: cover; /* Ensures the image covers the entire header area */
-  background-position: center; /* Centers the image within the header */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  height: 200px; /* Sets a fixed height for the header, adjust as needed */
-  width: 100%; 
-}
+/* Navbar & footer use theme colors */
+.navbar { background-color: var(--nav-bg) !important; }
+.navbar .navbar-brand,
+.navbar .nav-link { color: var(--nav-text) !important; }
+footer, footer .navbar { background-color: var(--footer-bg) !important; }
+footer p, footer .navbar-brand, footer .nav-link { color: var(--nav-text) !important; }
 
+/* Header banner (used by #salonInfo) */
 .header-text{
-    display: block;
+  background-color: var(--accent) !important;
+  color: var(--text);
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 100%;
+  margin: 10px auto;
+  display: block;
   text-align: center;
-  padding: 20px;
   font-size: 22px;
   font-weight: bold;
-  color: white;
-  max-width: 800px;
-  margin: 0 auto;
-
 }
+
+body.dark-mode img { border-radius: 6px; border: 1px solid #343a40; }
+
+
 
 img {
     display: block;
