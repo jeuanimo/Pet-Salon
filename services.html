@@ -51,73 +51,82 @@
     </nav>
     
       <img src="images/MPS (1).png" alt="Mitchell Pet Salon Logo" />
-   
-    <div class="form-group">
       <header>
-        <h1 class="header-text">🐾 Mitchell Pet Salon Service Offerings 🐾</h1>
-        <p  class="header-text" id="salonInfo"  
+        <h1>🐾 Mitchell Pet Salon Service Offerings 🐾</h1>
+        <p id="salonInfo"  
         ></p>
       </header>
-      
-<section><form class="m-5 border bg light p-4" id="servicesRegistrationForm" novalidate>
-        <h1>Our Services</h1>
-        <div class="form-group">
-        
-          <div class="mb-3">
-           
-            <label class="from-label" for="serviceName">Service:</label>
-           
-            <input
-              class="form-control"
-              type="text"
-              id="serviceName"
-              placeholder="Enter Service"
-              required
-            />
-            <span class="help-block" style="display:none;">Service name is required</span>
+   
+     <main class="container my-5">
+    <div class="row g-4">
+      <!-- Form -->
+      <section class="col-12 col-lg-5">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="h5 mb-3">Add a Service</h2>
 
-            
-          </div>
+            <!-- Disable native validation UI; we'll do our own -->
+            <form id="servicesForm" novalidate>
+              <div class="mb-3">
+                <label for="serviceName" class="form-label">Service Name</label>
+                <input type="text" class="form-control" id="serviceName" placeholder="e.g., Grooming" required />
+                <div class="invalid-feedback">Service name is required.</div>
+              </div>
 
-          <div class="mb-3">
-           
-            <label class="from-label" for="description">Description:</label>
-            
-            <input
-              class="form-control"
-              type="text"
-              id="serviceDescription"
-              placeholder="Description"
-              required
-            />
-            <span class="help-block" style="display:none;">Description is required</span>
-            
-         </div>
-          <div class="mb-3">
-            
-            
-            <label class="from-label" for="price">Price: </label>
-             
-           
-            <input
-              class="form-control"
-              type="number"
-              id="servicePrice"
-              placeholder="Price"
-              required
-            />
-            <span class="help-block" style="display:none;">Enter a valid price greater than 0</span>
-           </div> 
+              <div class="mb-3">
+                <label for="serviceDescription" class="form-label">Description</label>
+                <input type="text" class="form-control" id="serviceDescription" placeholder="Short description" required />
+                <div class="invalid-feedback">Description is required.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="servicePrice" class="form-label">Price (USD)</label>
+                <input type="number" class="form-control" id="servicePrice" placeholder="e.g., 49.99" step="0.01" min="0.01" required />
+                <div class="invalid-feedback">Enter a valid price greater than 0.</div>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                <button type="submit" class="btn btn-primary">Save Service</button>
+              </div>
+            </form>
           </div>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-         
+        </div>
+      </section>
+
+      <!-- List -->
+      <section class="col-12 col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h2 class="h5 mb-0">Saved Services</h2>
+              <span class="badge bg-secondary" id="servicesCount">0</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped align-middle mb-0">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th class="text-end">Price</th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="servicesTableBody">
+                  <!-- rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <p class="text-muted small mt-3 mb-0" id="emptyHint" style="display:none;">
+              No services saved yet. Add your first service with the form on the left.
+            </p>
           </div>
-        </form>
-        
-        </div> </section>
-      
+        </div>
+      </section>
+    </div>
+  </main>
 
 <footer>
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

@@ -22,13 +22,13 @@ $(function () {
 function byId(id) {
   return document.getElementById(id);
 };
+
 // Service constructor
 function Service(name, description, price) {
   this.name = name;
   this.description = description;
   this.price = price;
 }
-
 $(document).ready(function () {
   // handle form submit
   $("#servicesRegistrationForm").on("submit", function (event) {
@@ -118,6 +118,170 @@ $(document).ready(function () {
     }
   );
 });
+/* Services page */
+
+
+(function () {
+  "use strict";
+
+  const servicesKey = "mps_services";
+  let services = [];
+
+  // -------- LocalStorage helpers --------
+  function loadServices() {
+    try {
+      const raw = localStorage.getItem(servicesKey);
+      services = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(services)) services = [];
+    } catch (e) {
+      console.warn("Failed to parse services from storage:", e);
+      services = [];
+    }
+  }
+
+  function saveServices() {
+    localStorage.setItem(servicesKey, JSON.stringify(services));
+  }
+
+  // -------- UI helpers --------
+  function fmtPrice(value) {
+    const n = Number(value);
+    if (!isFinite(n)) return "$0.00";
+    return `$${n.toFixed(2)}`;
+  }
+
+  function renderServices() {
+    const $tbody = $("#servicesTableBody");
+    $tbody.empty();
+
+    if (!services.length) {
+      $("#emptyHint").show();
+    } else {
+      $("#emptyHint").hide();
+    }
+
+    services.forEach((svc, idx) => {
+      const row = `
+        <tr data-index="${idx}">
+          <td>${escapeHtml(svc.name)}</td>
+          <td>${escapeHtml(svc.description)}</td>
+          <td class="text-end">${fmtPrice(svc.price)}</td>
+          <td class="text-center">
+            <button type="button" class="btn btn-sm btn-danger js-delete">Delete</button>
+          </td>
+        </tr>`;
+      $tbody.append(row);
+    });
+
+    $("#servicesCount").text(services.length);
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function clearForm($form) {
+    $form[0].reset();
+    // Clear validation UI
+    $form.find(".form-control").removeClass("is-invalid is-valid");
+  }
+
+  // -------- Validation --------
+  function validateField($el) {
+    const id = $el.attr("id");
+    const val = $.trim($el.val());
+
+    let valid = true;
+
+    if (id === "serviceName" || id === "serviceDescription") {
+      valid = val.length > 0;
+    } else if (id === "servicePrice") {
+      const n = parseFloat(val);
+      valid = val.length > 0 && isFinite(n) && n > 0;
+    }
+
+    $el.toggleClass("is-invalid", !valid);
+    $el.toggleClass("is-valid", valid);
+
+    return valid;
+  }
+
+  function validateForm($form) {
+    const $name = $("#serviceName");
+    const $desc = $("#serviceDescription");
+    const $price = $("#servicePrice");
+
+    const v1 = validateField($name);
+    const v2 = validateField($desc);
+    const v3 = validateField($price);
+
+    if (!(v1 && v2 && v3)) {
+      // focus first invalid
+      const $firstInvalid = $form.find(".is-invalid").first();
+      if ($firstInvalid.length) $firstInvalid.trigger("focus");
+      return false;
+    }
+    return true;
+  }
+
+  // -------- Event bindings --------
+  $(function () {
+    const $form = $("#servicesForm");
+
+    // Live validation
+    $form.on("input blur", ".form-control", function () {
+      validateField($(this));
+    });
+
+    // Submit handler
+    $form.on("submit", function (e) {
+      e.preventDefault();
+
+      if (!validateForm($form)) return;
+
+      // Build new service
+      const newService = {
+        id: Date.now(),
+        name: $.trim($("#serviceName").val()),
+        description: $.trim($("#serviceDescription").val()),
+        price: parseFloat($("#servicePrice").val())
+      };
+
+      // Save to storage
+      services.push(newService);
+      saveServices();
+      renderServices();
+
+      // Clear inputs and validation states
+      clearForm($form);
+    });
+
+    // Reset button clears validation state too
+    $form.on("reset", function () {
+      clearForm($form);
+    });
+
+    // Delete service (event delegation)
+    $(document).on("click", ".js-delete", function () {
+      const $tr = $(this).closest("tr");
+      const index = Number($tr.data("index"));
+      if (Number.isInteger(index)) {
+        services.splice(index, 1);
+        saveServices();
+        renderServices();
+      }
+    });
+
+    // Initial load
+    loadServices();
+    renderServices();
+  });
+})();
 
 // ----- Salon Info -----
 const salon = {

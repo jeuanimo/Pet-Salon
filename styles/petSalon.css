@@ -199,4 +199,17 @@ input, textarea {
   border: 2px solid red;
   background-color: #fff0f0;
 }
+/* Make invalid fields stand out slightly more */
+.form-control.is-invalid{
+  box-shadow: 0 0 0 .1rem rgba(220,53,69,.15);
+}
 
+/* Tighten table cell spacing a bit */
+.table td, .table th{
+  vertical-align: middle;
+}
+
+/* Cards */
+.card{
+  border-radius: .8rem;
+}
