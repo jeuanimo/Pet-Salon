@@ -69,6 +69,10 @@ img {
   height: 200px; /* Sets a fixed height for the header, adjust as needed */
   
 }
+p {
+  font-family: Gabriola;
+  font-size: x-large;
+}
 
 h1 {
   margin: 0;
@@ -98,7 +102,7 @@ section {
 
 
 header {
-  background-color: #ff8c42;
+  background-color: #ffa500;
   padding: 20px;
   color: white;
 }
@@ -207,9 +211,47 @@ input, textarea {
 /* Tighten table cell spacing a bit */
 .table td, .table th{
   vertical-align: middle;
+  padding-left: 5;
+  padding-bottom: 20;
+  padding-right: 10;
+  column-gap: 10;
+  margin-left: 20;
+  margin-right: 20;
 }
 
 /* Cards */
 .card{
   border-radius: .8rem;
+  row-gap: 5;
+  column-gap: 10;
+  margin: 20px;;
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.image-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.is-invalid {
+  border: 2px solid red !important;
+}
+
+
+.row .card {
+  margin-right: 15px;
+}
+.metal-text {
+  font-size: 50px;
+  font-family: 'Arial Black', sans-serif;
+  font-weight: 900;
+  background: linear-gradient(to right, #ffd700, #ffa500, #ffd700); /* Gold gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
 }
